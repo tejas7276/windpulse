@@ -1,0 +1,231 @@
+:root {
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --surface: #ffffff;
+  --page: #f6f7f9;
+  --accent: #2563eb;
+  --notice-bg: #eff6ff;
+  --error-bg: #fef2f2;
+  --error: #b91c1c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+main {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
+h2 {
+  margin: 0 0 8px;
+  font-size: 1.25rem;
+}
+
+h3 {
+  margin: 24px 0 8px;
+  font-size: 1rem;
+}
+
+section {
+  margin-top: 32px;
+  padding: 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.subtitle {
+  margin: 4px 0;
+  font-size: 1.05rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.small {
+  font-size: 0.85rem;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.controls label {
+  font-weight: 600;
+}
+
+input[type="date"] {
+  padding: 6px 10px;
+  border: 1px solid #9ca3af;
+  border-radius: 6px;
+  font: inherit;
+}
+
+input:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.status {
+  margin-top: 24px;
+  color: var(--muted);
+}
+
+.notice {
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: var(--notice-bg);
+  border-left: 4px solid var(--accent);
+  border-radius: 4px;
+}
+
+.error {
+  margin-top: 24px;
+  padding: 12px 14px;
+  background: var(--error-bg);
+  border-left: 4px solid var(--error);
+  border-radius: 4px;
+  color: var(--error);
+}
+
+.error p {
+  margin: 0 0 8px;
+}
+
+button {
+  padding: 6px 14px;
+  border: 1px solid var(--error);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--error);
+  font: inherit;
+  cursor: pointer;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+  margin: 12px 0 16px;
+}
+
+.card {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.card-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.card-value {
+  margin: 2px 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.card-note {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.chart {
+  width: 100%;
+}
+
+.tooltip {
+  padding: 8px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.legend-note {
+  margin: 4px 0 0;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.swatch {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin: 0 4px 0 12px;
+  border-radius: 2px;
+}
+
+details {
+  margin: 8px 0;
+}
+
+summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+caption {
+  padding: 8px 0;
+  text-align: left;
+  font-weight: 600;
+}
+
+th,
+td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--border);
+  text-align: right;
+}
+
+th:first-child,
+td:first-child {
+  text-align: left;
+}
+
+@media (max-width: 600px) {
+  section {
+    padding: 14px;
+  }
+
+  .controls {
+    flex-wrap: wrap;
+  }
+}
