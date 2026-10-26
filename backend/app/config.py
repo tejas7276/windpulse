@@ -30,8 +30,15 @@ LARGE_ERROR_FACTOR = 1.5
 PERIOD_HOURS = 0.5  # one settlement period
 GENERATION_UNIT = "MW"
 
+DEFAULT_CORS_ORIGINS = (
+    "http://localhost:5173",
+    "http://localhost:3000",
+    "https://windpulse-o2cpcudit-tejasshinde7276-8524s-projects.vercel.app",
+)
+
 CORS_ORIGINS = [
     origin.strip()
-    for origin in os.getenv("CORS_ORIGINS", "http://localhost:5173,http://localhost:3000").split(",")
+    .rstrip("/")
+    for origin in os.getenv("CORS_ORIGINS", ",".join(DEFAULT_CORS_ORIGINS)).split(",")
     if origin.strip()
 ]

@@ -164,8 +164,8 @@ npm run dev                                           # http://localhost:5173
 
 | Variable | Where | Default | Purpose |
 | --- | --- | --- | --- |
-| `VITE_API_URL` | frontend (build time) | `http://localhost:8000` | Backend base URL |
-| `CORS_ORIGINS` | backend | `http://localhost:5173,http://localhost:3000` | Comma-separated allowed browser origins |
+| `VITE_API_URL` | frontend (build time) | `http://localhost:8000` for local development; `https://windpulse-api.onrender.com` in production | Backend base URL |
+| `CORS_ORIGINS` | backend | `http://localhost:5173,http://localhost:3000,https://windpulse-o2cpcudit-tejasshinde7276-8524s-projects.vercel.app` | Comma-separated allowed browser origins |
 | `DAY_AHEAD_CUTOFF` | backend | `09:20` | Cutoff, UK local time on the previous day |
 | `ELEXON_BASE_URL` | backend | `https://data.elexon.co.uk/bmrs/api/v1` | Elexon API base |
 | `ELEXON_TIMEOUT_SECONDS` | backend | `30` | Per-request timeout |
@@ -173,7 +173,7 @@ npm run dev                                           # http://localhost:5173
 | `FORECAST_LOOKBACK_HOURS` | backend | `72` | How far before the cutoff to fetch publications |
 | `MIN_MATCHED_PERIODS` | backend | `12` | Minimum matched half-hours to show metrics |
 
-No secrets are needed; no API key is used. `.env` files are git-ignored.
+No secrets are needed; no API key is used. Local `.env` files are git-ignored; the committed `.env.example` files and `frontend/.env.production` contain only non-secret settings.
 
 ## 14. Tests
 
@@ -204,13 +204,13 @@ It prints each dataset's real field names, row counts, `publishTime` behaviour, 
 
 1. Push the repo to GitHub, then in Render choose *New → Blueprint* (uses `render.yaml`) or *New → Web Service* with root directory `backend`.
 2. Build command: `pip install -r requirements.txt` · Start command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT` · Health check path: `/api/health`.
-3. Set `CORS_ORIGINS` to your Vercel URL (e.g. `https://your-app.vercel.app`, no trailing slash).
+3. Set `CORS_ORIGINS` to `https://windpulse-o2cpcudit-tejasshinde7276-8524s-projects.vercel.app` (the production Vercel origin, with no trailing slash). The defaults retain both local-development origins; setting this Render variable restricts the deployed backend to the production frontend.
 4. After deploy, open `https://<service>.onrender.com/api/health`, then `/api/wind/day?date=2026-01-10`. This also confirms Render can reach Elexon.
 
 **Frontend → Vercel**
 
 1. Import the repo; set *Root Directory* to `frontend` (framework: Vite, build `npm run build`, output `dist`).
-2. Add environment variable `VITE_API_URL` = your Render URL, then deploy. Redeploy after changing it.
+2. Set `VITE_API_URL` = `https://windpulse-api.onrender.com`, then deploy. This value is also in `frontend/.env.production`, so production builds use the Render API even if the Vercel environment variable is not configured. Redeploy after changing it.
 
 ## 16–17. Links
 

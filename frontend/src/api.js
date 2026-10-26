@@ -6,7 +6,9 @@ export async function fetchDay(date, signal) {
     response = await fetch(`${API_URL}/api/wind/day?date=${date}`, { signal });
   } catch (err) {
     if (err.name === "AbortError") throw err;
-    throw new Error("Could not reach the WindPulse API. Check that the backend is running.");
+    throw new Error(
+      `Could not reach the WindPulse API at ${API_URL}. The backend may be unavailable or still starting; try again shortly.`
+    );
   }
 
   const body = await response.json().catch(() => null);

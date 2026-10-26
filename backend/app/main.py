@@ -14,9 +14,6 @@ app = FastAPI(title="WindPulse API")
 
 app.add_middleware(
     CORSMiddleware,
-     allow_origins=[
-        "https://windpulse-o2cgpudit-tejasshinde7276-8524s-projects.vercel.app",
-    ],
     allow_origins=config.CORS_ORIGINS,
     allow_methods=["GET"],
     allow_headers=["*"],

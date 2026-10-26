@@ -15,6 +15,40 @@ def test_health():
     assert response.json() == {"status": "ok"}
 
 
+@pytest.mark.parametrize(
+    "origin",
+    [
+        "https://windpulse-o2cpcudit-tejasshinde7276-8524s-projects.vercel.app",
+        "http://localhost:5173",
+        "http://localhost:3000",
+    ],
+)
+def test_cors_allows_production_and_local_origins(origin):
+    response = client.options(
+        "/api/health",
+        headers={
+            "Origin": origin,
+            "Access-Control-Request-Method": "GET",
+        },
+    )
+
+    assert response.status_code == 200
+    assert response.headers["access-control-allow-origin"] == origin
+
+
+def test_cors_rejects_unknown_origin():
+    response = client.options(
+        "/api/health",
+        headers={
+            "Origin": "https://untrusted.example",
+            "Access-Control-Request-Method": "GET",
+        },
+    )
+
+    assert response.status_code == 400
+    assert "access-control-allow-origin" not in response.headers
+
+
 @pytest.mark.parametrize("value", ["10-01-2026", "2026-13-01", "not-a-date", ""])
 def test_malformed_date_is_rejected(value):
     assert client.get("/api/wind/day", params={"date": value}).status_code == 422
